@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<litepal>
+    <dbname value="YiWeather"/>
+    <version value="1"/>
+    <list>
+        <mapping class="com.yiweather.android.db.Province"/>
+        <mapping class="com.yiweather.android.db.City"/>
+        <mapping class="com.yiweather.android.db.County"/>
+    </list>
+</litepal>
