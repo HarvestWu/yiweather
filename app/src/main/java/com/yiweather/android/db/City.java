@@ -6,6 +6,9 @@ import org.litepal.crud.DataSupport;
  * Created by 吴金秋 on 2017/3/28.
  */
 
+/**
+ * City的实体类
+ */
 public class City extends DataSupport {
 
     private int id; //每个实体应有的字段

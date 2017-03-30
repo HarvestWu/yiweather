@@ -6,6 +6,9 @@ import org.litepal.crud.DataSupport;
  * Created by 吴金秋 on 2017/3/28.
  */
 
+/**
+ * County的实体类
+ */
 public class County extends DataSupport {
 
     private int id;//每个实体应有的字段

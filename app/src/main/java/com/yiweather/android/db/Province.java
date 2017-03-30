@@ -6,6 +6,9 @@ import org.litepal.crud.DataSupport;
  * Created by 吴金秋 on 2017/3/28.
  */
 
+/**
+ * Province的实体类
+ */
 public class Province extends DataSupport {
 
     private int id;//每个实体都应有字段
