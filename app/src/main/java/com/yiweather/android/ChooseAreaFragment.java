@@ -8,7 +8,6 @@ package com.yiweather.android;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +27,6 @@ import com.yiweather.android.util.Utility;
 import org.litepal.crud.DataSupport;
 
 import java.io.IOException;
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +45,7 @@ public class ChooseAreaFragment extends Fragment{
 
     private ProgressDialog progressDialog;
 
-    private TextView titletext;
+    private TextView titleText;
     private Button backButton;
     private ListView listView;
 
@@ -66,7 +64,7 @@ public class ChooseAreaFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater,ViewGroup container,
                              Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.choose_area,container,false);
-        titletext= (TextView) view.findViewById(R.id.title_text);
+        titleText= (TextView) view.findViewById(R.id.title_text);
         backButton= (Button) view.findViewById(R.id.back_button);
         listView= (ListView) view.findViewById(R.id.list_view);
         adapter=new ArrayAdapter<>(getContext(),
@@ -107,7 +105,7 @@ public class ChooseAreaFragment extends Fragment{
      * 查询全国所有的省，优先从数据库查询，如果没有查询到再去服务器查询
      */
     private void queryProvinces(){
-        titletext.setText("中国");
+        titleText.setText("中国");
         backButton.setVisibility(View.GONE);
         provinceList= DataSupport.findAll(Province.class);
         if(provinceList.size()>0){
@@ -128,7 +126,7 @@ public class ChooseAreaFragment extends Fragment{
      * 查询选中省内所有的市，优先从数据库查询，如果没有查询到再去服务器查询
      */
     private void queryCities(){
-        titletext.setText(selectedProvince.getProvinceName());
+        titleText.setText(selectedProvince.getProvinceName());
         backButton.setVisibility(View.VISIBLE);
         cityList= DataSupport.where("provinceid=?", String.valueOf(selectedProvince.getId()))
                 .find(City.class);
@@ -142,7 +140,7 @@ public class ChooseAreaFragment extends Fragment{
             currentLevel=LEVEL_CITY;
         }else {
             int provinceCode=selectedProvince.getProvinceCode();
-            String address="http://guolin.tech/api/china"+provinceCode;
+            String address="http://guolin.tech/api/china/"+provinceCode;
             queryFromServer(address,"city");
         }
     }
@@ -151,7 +149,7 @@ public class ChooseAreaFragment extends Fragment{
      * 查询选中市内所有的县，优先从数据库查询，如果没有查询到再去服务器查询
      */
     private void queryCounties(){
-        titletext.setText(selectedCity.getCityName());
+        titleText.setText(selectedCity.getCityName());
         backButton.setVisibility(View.VISIBLE);
         countyList= DataSupport.where("cityid=?", String.valueOf(selectedCity.getId()))
                 .find(County.class);
@@ -166,7 +164,7 @@ public class ChooseAreaFragment extends Fragment{
         }else {
             int provinceCode=selectedProvince.getProvinceCode();
             int cityCode=selectedCity.getCityCode();
-            String address="http://guolin.tech/api/china"+provinceCode+cityCode;
+            String address="http://guolin.tech/api/china/"+provinceCode+"/"+cityCode;
             queryFromServer(address,"county");
         }
     }
